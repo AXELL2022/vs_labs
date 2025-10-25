@@ -1,0 +1,14 @@
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/bin/Debug/net9.0/Lab21-22
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/bin/Debug/net9.0/Lab21-22.deps.json
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/bin/Debug/net9.0/Lab21-22.runtimeconfig.json
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/bin/Debug/net9.0/Lab21-22.dll
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/bin/Debug/net9.0/Lab21-22.pdb
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.GeneratedMSBuildEditorConfig.editorconfig
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.AssemblyInfoInputs.cache
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.AssemblyInfo.cs
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.csproj.CoreCompileInputs.cache
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.dll
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/refint/Lab21-22.dll
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.pdb
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/Lab21-22.genruntimeconfig.cache
+/run/media/axell/Drive D/Rider_labs/Lab21-22/Lab21-22/obj/Debug/net9.0/ref/Lab21-22.dll

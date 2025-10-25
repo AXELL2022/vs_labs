@@ -1,0 +1,14 @@
+D:\Rider_labs\lab20\lab20\bin\Debug\net10.0\lab20.exe
+D:\Rider_labs\lab20\lab20\bin\Debug\net10.0\lab20.deps.json
+D:\Rider_labs\lab20\lab20\bin\Debug\net10.0\lab20.runtimeconfig.json
+D:\Rider_labs\lab20\lab20\bin\Debug\net10.0\lab20.dll
+D:\Rider_labs\lab20\lab20\bin\Debug\net10.0\lab20.pdb
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.GeneratedMSBuildEditorConfig.editorconfig
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.AssemblyInfoInputs.cache
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.AssemblyInfo.cs
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.csproj.CoreCompileInputs.cache
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.dll
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\refint\lab20.dll
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.pdb
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\lab20.genruntimeconfig.cache
+D:\Rider_labs\lab20\lab20\obj\Debug\net10.0\ref\lab20.dll
