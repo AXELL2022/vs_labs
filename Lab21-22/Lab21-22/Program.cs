@@ -14,7 +14,7 @@ namespace EducationalInstitutionApp
         {
             Console.OutputEncoding = Encoding.UTF8;
             
-            // Встановлення заголовку та розміру тільки для Windows
+            // Встановлення заголовка та розміру тільки для Windows
             try
             {
                 Console.Title = "Лабораторна робота №21-22, Варіант 25";
@@ -25,7 +25,6 @@ namespace EducationalInstitutionApp
             }
             catch
             {
-                // Ігноруємо помилки налаштування консолі на несумісних платформах
             }
 
             bool exit = false;
