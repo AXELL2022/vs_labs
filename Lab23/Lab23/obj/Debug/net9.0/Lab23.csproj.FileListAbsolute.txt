@@ -1,0 +1,15 @@
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/bin/Debug/net9.0/Lab23
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/bin/Debug/net9.0/Lab23.deps.json
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/bin/Debug/net9.0/Lab23.runtimeconfig.json
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/bin/Debug/net9.0/Lab23.dll
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/bin/Debug/net9.0/Lab23.pdb
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.GeneratedMSBuildEditorConfig.editorconfig
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.AssemblyInfoInputs.cache
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.AssemblyInfo.cs
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.csproj.CoreCompileInputs.cache
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.sourcelink.json
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.dll
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/refint/Lab23.dll
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.pdb
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/Lab23.genruntimeconfig.cache
+/run/media/axell/Drive D/Rider_labs/Lab23/Lab23/obj/Debug/net9.0/ref/Lab23.dll
