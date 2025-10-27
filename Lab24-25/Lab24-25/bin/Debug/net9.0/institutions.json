@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "Name": "гринч",
+    "Address": "12б",
+    "FoundationYear": 1903,
+    "StudentCount": 5000,
+    "SpecialtyCount": 30
+  }
+]
