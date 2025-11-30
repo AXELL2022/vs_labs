@@ -1,289 +1,226 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace Lab32_33_Variant6
+namespace Lab32_33
 {
-    public partial class MainForm : Form
+    public partial class Form1 : Form
     {
+        private bool isRegistered = false;
         private string currentUser = "";
-        private bool isLoggedIn = false;
-        private string selectedFileName = "";
+        private ToolStripStatusLabel userStatusLabel;
+        private ToolStripStatusLabel dateStatusLabel;
+        private Timer dateTimer;
 
-        public MainForm()
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            // Встановлення поточної дати
-            statusDate.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            InitializeUI();
+            SetupEventHandlers();
         }
 
-        // Обробник реєстрації
-        private void itemRegistration_Click(object sender, EventArgs e)
+        private void InitializeUI()
+        {
+            this.Text = "Стандартні діалоги. Ясиняцький Кирило БІКСб22440д";
+            this.Size = new Size(800, 600);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MinimizeBox = true;
+            this.MaximizeBox = true;
+            this.ContextMenuStrip = CreateContextMenu();
+
+            dateTimer = new Timer();
+            dateTimer.Interval = 1000;
+            dateTimer.Tick += (s, e) => UpdateStatusBar();
+            dateTimer.Start();
+        }
+
+        private void SetupEventHandlers()
+        {
+            // Головне меню
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                if (item.Text.Contains("Головне"))
+                {
+                    if (item.DropDownItems.Count > 0) item.DropDownItems[0].Click += MainMenu_Registration;
+                    if (item.DropDownItems.Count > 2) item.DropDownItems[2].Click += MainMenu_Exit;
+                }
+                else if (item.Text.Contains("Діалоги"))
+                {
+                    if (item.DropDownItems.Count > 0) item.DropDownItems[0].Click += Dialog_SelectColor;
+                    if (item.DropDownItems.Count > 1) item.DropDownItems[1].Click += Dialog_PrintPreview;
+                    if (item.DropDownItems.Count > 2) item.DropDownItems[2].Click += Dialog_OpenFile;
+                    if (item.DropDownItems.Count > 3) item.DropDownItems[3].Click += Dialog_Print;
+                }
+                else if (item.Text.Contains("Додатково"))
+                {
+                    if (item.DropDownItems.Count > 0) item.DropDownItems[0].Click += Additional_About;
+                    if (item.DropDownItems.Count > 1) item.DropDownItems[1].Click += Additional_OpenWord;
+                    if (item.DropDownItems.Count > 2) item.DropDownItems[2].Click += Additional_Execute;
+                }
+            }
+
+            // Панель інструментів
+            foreach (ToolStripButton btn in toolStrip1.Items.OfType<ToolStripButton>())
+            {
+                if (btn != null && !string.IsNullOrEmpty(btn.ToolTipText))
+                {
+                    if (btn.ToolTipText.Contains("Колір"))
+                        btn.Click += Dialog_SelectColor;
+                    else if (btn.ToolTipText.Contains("Перегляд"))
+                        btn.Click += Dialog_PrintPreview;
+                    else if (btn.ToolTipText.Contains("Відкрити"))
+                        btn.Click += Dialog_OpenFile;
+                    else if (btn.ToolTipText.Contains("Друк"))
+                        btn.Click += Dialog_Print;
+                }
+            }
+        }
+
+        private void MainMenu_Registration(object sender, EventArgs e)
         {
             RegistrationForm regForm = new RegistrationForm();
             if (regForm.ShowDialog() == DialogResult.OK)
             {
+                isRegistered = true;
                 currentUser = regForm.Username;
-                isLoggedIn = true;
-                statusUser.Text = "Користувач: " + currentUser;
-
-                // Активація пунктів меню Діалоги
-                EnableDialogMenus(true);
-
-                MessageBox.Show("Ви успішно авторизовані!", "Реєстрація",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                userStatusLabel.Text = $"Користувач: {currentUser}";
+                EnableDialogMenuItems(true);
+                EnableToolStripButtons(true);
             }
         }
 
-        // Метод активації/деактивації меню діалогів
-        private void EnableDialogMenus(bool enabled)
+        private void MainMenu_Exit(object sender, EventArgs e)
         {
-            // Активація пунктів меню
-            itemColorDialog.Enabled = enabled;
-            itemPrintPreview.Enabled = enabled;
-            itemOpenFile.Enabled = enabled;
-            itemPrint.Enabled = enabled;
-
-            // Активація кнопок на панелі інструментів
-            btnColor.Enabled = enabled;
-            btnPreview.Enabled = enabled;
-            btnOpen.Enabled = enabled;
-            btnPrint.Enabled = enabled;
-
-            // Активація контекстного меню
-            ctxColor.Enabled = enabled;
-            ctxPreview.Enabled = enabled;
-            ctxOpen.Enabled = enabled;
-            ctxPrint.Enabled = enabled;
+            Application.Exit();
         }
 
-        // Обробник виходу
-        private void itemExit_Click(object sender, EventArgs e)
+        private void Dialog_SelectColor(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Ви дійсно хочете вийти?", "Вихід",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            if (!isRegistered) return;
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.ShowDialog();
         }
 
-        // Обробник вибору кольору
-        private void itemColorDialog_Click(object sender, EventArgs e)
+        private void Dialog_PrintPreview(object sender, EventArgs e)
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("Ви обрали колір: " + colorDialog1.Color.Name,
-                    "Вибір кольору", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            if (!isRegistered) return;
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            printPreviewDialog.ShowDialog();
         }
 
-        // Обробник попереднього перегляду
-        private void itemPrintPreview_Click(object sender, EventArgs e)
+        private void Dialog_OpenFile(object sender, EventArgs e)
         {
-            MessageBox.Show("Попередній перегляд друку", "Діалог",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!isRegistered) return;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Всі файли (*.*)|*.*";
+            openFileDialog.ShowDialog();
         }
 
-        // Обробник відкриття файлу
-        private void itemOpenFile_Click(object sender, EventArgs e)
+        private void Dialog_Print(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
-            openFileDialog1.Title = "Відкриття файлу";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                selectedFileName = openFileDialog1.FileName;
-                MessageBox.Show("Ви обрали файл: " + selectedFileName,
-                    "Відкриття файлу", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            if (!isRegistered) return;
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.ShowDialog();
         }
 
-        // Обробник друку
-        private void itemPrint_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Діалог друку", "Друк",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        // Обробник "Про розробника"
-        private void itemAbout_Click(object sender, EventArgs e)
+        private void Additional_About(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm();
             aboutForm.ShowDialog();
         }
 
-        // Обробник "Виконати"
-        private void itemExecute_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(selectedFileName))
-            {
-                MessageBox.Show("Спочатку оберіть файл через 'Відкриття файлу'!",
-                    "Увага", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Зміна властивостей TextBox згідно варіанту 6
-            textBox1.BackColor = Color.Yellow;
-            textBox1.Font = new Font("Times New Roman", 12, FontStyle.Underline);
-            textBox1.Text = selectedFileName;
-        }
-
-        // Обробник відкриття Word
-        private void itemWord_Click(object sender, EventArgs e)
+        private void Additional_OpenWord(object sender, EventArgs e)
         {
             try
             {
-                // Спроба відкрити Word
-                Process.Start("winword.exe");
+                Process.Start("C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
             }
             catch
             {
                 try
                 {
-                    // Якщо Word не знайдено, відкриваємо Notepad
                     Process.Start("notepad.exe");
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show("Не вдалося відкрити текстовий редактор: " + ex.Message,
-                        "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Не вдалося відкрити текстовий редактор", "Помилка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-    }
 
-    // Форма реєстрації
-    public partial class RegistrationForm : Form
-    {
-        private Label lblUsername;
-        private Label lblPassword;
-        private TextBox txtUsername;
-        private TextBox txtPassword;
-        private Button btnOK;
-        private Button btnCancel;
-
-        public string Username { get; private set; }
-
-        public RegistrationForm()
+        private void Additional_Execute(object sender, EventArgs e)
         {
-            InitializeRegistrationForm();
-        }
+            if (!isRegistered) return;
 
-        private void InitializeRegistrationForm()
-        {
-            this.Text = "Реєстрація";
-            this.Size = new Size(350, 200);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Всі файли (*.*)|*.*";
 
-            lblUsername = new Label();
-            lblUsername.Text = "Логін:";
-            lblUsername.Location = new Point(30, 30);
-            lblUsername.Size = new Size(80, 20);
-
-            txtUsername = new TextBox();
-            txtUsername.Location = new Point(120, 30);
-            txtUsername.Size = new Size(180, 20);
-
-            lblPassword = new Label();
-            lblPassword.Text = "Пароль:";
-            lblPassword.Location = new Point(30, 70);
-            lblPassword.Size = new Size(80, 20);
-
-            txtPassword = new TextBox();
-            txtPassword.Location = new Point(120, 70);
-            txtPassword.Size = new Size(180, 20);
-            txtPassword.PasswordChar = '*';
-
-            btnOK = new Button();
-            btnOK.Text = "OK";
-            btnOK.Location = new Point(100, 120);
-            btnOK.Click += BtnOK_Click;
-
-            btnCancel = new Button();
-            btnCancel.Text = "Скасувати";
-            btnCancel.Location = new Point(200, 120);
-            btnCancel.DialogResult = DialogResult.Cancel;
-
-            this.Controls.Add(lblUsername);
-            this.Controls.Add(txtUsername);
-            this.Controls.Add(lblPassword);
-            this.Controls.Add(txtPassword);
-            this.Controls.Add(btnOK);
-            this.Controls.Add(btnCancel);
-
-            this.AcceptButton = btnOK;
-            this.CancelButton = btnCancel;
-        }
-
-        private void BtnOK_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Введіть логін!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (mainTextBox != null)
+                {
+                    mainTextBox.Text = System.IO.Path.GetFileName(openFileDialog.FileName);
+                    mainTextBox.BackColor = Color.Yellow;
+                    mainTextBox.Font = new Font("Times New Roman", 12, FontStyle.Underline);
+                }
+            }
+        }
+
+        private void EnableDialogMenuItems(bool enabled)
+        {
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                if (item.Text.Contains("Діалоги"))
+                {
+                    foreach (ToolStripMenuItem subItem in item.DropDownItems)
+                    {
+                        subItem.Enabled = enabled;
+                    }
+                }
             }
 
-            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (this.ContextMenuStrip != null)
             {
-                MessageBox.Show("Введіть пароль!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                foreach (ToolStripMenuItem item in this.ContextMenuStrip.Items)
+                {
+                    item.Enabled = enabled;
+                }
             }
-
-            Username = txtUsername.Text;
-            this.DialogResult = DialogResult.OK;
-        }
-    }
-
-    // Форма "Про розробника"
-    public partial class AboutForm : Form
-    {
-        private Label lblInfo;
-        private Button btnClose;
-
-        public AboutForm()
-        {
-            InitializeAboutForm();
         }
 
-        private void InitializeAboutForm()
+        private void EnableToolStripButtons(bool enabled)
         {
-            this.Text = "Про розробника";
-            this.Size = new Size(400, 250);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            foreach (ToolStripButton btn in toolStrip1.Items.OfType<ToolStripButton>())
+            {
+                btn.Enabled = enabled;
+            }
+        }
 
-            lblInfo = new Label();
-            lblInfo.Text = "Лабораторна робота №32-33\n\n" +
-                          "Прізвище: [Ваше Прізвище]\n" +
-                          "Група: [Ваша Група]\n" +
-                          "Спеціальність: [Ваша Спеціальність]\n\n" +
-                          "Варіант: 6\n\n" +
-                          "Дисципліна: Технології безпечного програмування";
-            lblInfo.Location = new Point(30, 30);
-            lblInfo.Size = new Size(340, 150);
-            lblInfo.AutoSize = false;
+        private void UpdateStatusBar()
+        {
+            dateStatusLabel.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+        }
 
-            btnClose = new Button();
-            btnClose.Text = "Закрити";
-            btnClose.Location = new Point(150, 180);
-            btnClose.Click += (s, ev) => { this.Close(); };
-
-            this.Controls.Add(lblInfo);
-            this.Controls.Add(btnClose);
+        private ContextMenuStrip CreateContextMenu()
+        {
+            ContextMenuStrip contextMenu = new ContextMenuStrip();
+            contextMenu.Items.Add(new ToolStripMenuItem("Вибір кольору", null, Dialog_SelectColor) { Enabled = false });
+            contextMenu.Items.Add(new ToolStripMenuItem("Попередній перегляд", null, Dialog_PrintPreview) { Enabled = false });
+            contextMenu.Items.Add(new ToolStripMenuItem("Відкриття файлу", null, Dialog_OpenFile) { Enabled = false });
+            contextMenu.Items.Add(new ToolStripMenuItem("Друк", null, Dialog_Print) { Enabled = false });
+            return contextMenu;
         }
     }
 }

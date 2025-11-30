@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("f467918b-a346-4613-be67-1e0f92cff15f")]
+[assembly: Guid("65a79ef6-1111-4c7f-a7a3-e9399d2230c9")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
