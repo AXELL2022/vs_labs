@@ -8,24 +8,26 @@
     "net9.0": []
   },
   "packageFolders": {
-    "/home/axell/.nuget/packages/": {}
+    "C:\\Users\\yasin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/run/media/axell/Drive D/Rider_labs/Lab20.1/Lab20.1/Lab20.1.csproj",
+      "projectUniqueName": "D:\\Rider_labs\\Lab20.1\\Lab20.1\\Lab20.1.csproj",
       "projectName": "Lab20.1",
-      "projectPath": "/run/media/axell/Drive D/Rider_labs/Lab20.1/Lab20.1/Lab20.1.csproj",
-      "packagesPath": "/home/axell/.nuget/packages/",
-      "outputPath": "/run/media/axell/Drive D/Rider_labs/Lab20.1/Lab20.1/obj/",
+      "projectPath": "D:\\Rider_labs\\Lab20.1\\Lab20.1\\Lab20.1.csproj",
+      "packagesPath": "C:\\Users\\yasin\\.nuget\\packages\\",
+      "outputPath": "D:\\Rider_labs\\Lab20.1\\Lab20.1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/axell/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\yasin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -44,7 +46,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -60,12 +62,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.11, 9.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[9.0.11, 9.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.11, 9.0.11]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.11, 9.0.11]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/axell/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
